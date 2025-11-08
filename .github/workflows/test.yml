@@ -28,4 +28,8 @@ jobs:
           repository: ${{ inputs.repository }}
           ref: ${{ inputs.ref }}
 
-      - run: ls -l
+      - uses: hetznercloud/tps-action@main
+
+      - uses: hetznercloud/setup-hcloud@v1
+
+      - run: hcloud server-type list
