@@ -1,0 +1,31 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+  workflow_dispatch:
+    inputs:
+      repository:
+        required: true
+        description: Repository to checkout
+      ref:
+        required: true
+        description: Ref to checkout
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - if: github.event_name != 'workflow_dispatch'
+        uses: actions/checkout@v5
+
+      - if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v5
+        with:
+          repository: ${{ inputs.repository }}
+          ref: ${{ inputs.ref }}
+
+      - run: ls -l
