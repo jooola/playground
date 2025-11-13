@@ -33,6 +33,13 @@ jobs:
           repository: ${{ inputs.repository }}
           ref: ${{ inputs.ref }}
 
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+
+      - run: go env
+
       - uses: hetznercloud/tps-action@main
 
       - uses: hetznercloud/setup-hcloud@v1
